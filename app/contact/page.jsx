@@ -38,7 +38,7 @@ const Contact = () => {
   className="py-6 "
   >
     <div className="mx-auto container">
-      <div className="flex felx-col xl:flex-row gap-[30px] ">
+      <div className="flex flex-col xl:flex-row gap-[30px] ">
         {/* form */}
         <div className="xl:w-[54%] order-2 xl:order-none ">
           <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl ">
