@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { BsArrowDownRight } from "react-icons/bs";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -9,28 +9,28 @@ const services = [
     num: "01",
     title: "Web Development",
     desctiption:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod laborum deleniti vero, magnam accusamus harum dignissimos debitis possimus ex vitae.",
+      "Build fast, responsive, and scalable web apps with Next.js/React, clean APIs, and modern tooling—optimized for performance, accessibility, and SEO.",
     href: "",
   },
   {
     num: "02",
     title: "UI/UX Design",
     desctiption:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod laborum deleniti vero, magnam accusamus harum dignissimos debitis possimus ex vitae.",
+      "Design user-centered interfaces from research to high‑fidelity prototypes—clear flows, consistent design systems, and accessible experiences that convert.",
     href: "",
   },
   {
     num: "03",
     title: "Logo Design",
     desctiption:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod laborum deleniti vero, magnam accusamus harum dignissimos debitis possimus ex vitae.",
+      "Craft distinctive, scalable logos that reflect your brand’s voice—delivered with versatile assets and usage guidelines for any platform.",
     href: "",
   },
   {
     num: "04",
     title: "SEO",
     desctiption:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod laborum deleniti vero, magnam accusamus harum dignissimos debitis possimus ex vitae.",
+      "Improve discoverability with technical SEO, Core Web Vitals tuning, structured data, on‑page optimization, and analytics-driven growth.",
     href: "",
   },
 ];
@@ -58,12 +58,17 @@ const Services = () => {
                   <div className="text-5xl font-extrabold text-outline text-transparent group-hover:text-outline-hover">
                     {item.num}
                   </div>
-                  <Link href={item.href} className="w-[70px] h-[70px] rounded-full bg-white group-hover:bg-accent transition-all duration-500 flex  justify-center items-center hover:-rotate-45"> 
-                    <BsArrowDownRight className="text-primary text-3xl" /> 
-                  </Link> 
+                  <Link
+                    href={item.href}
+                    className="w-[70px] h-[70px] rounded-full bg-white group-hover:bg-accent transition-all duration-500 flex  justify-center items-center hover:-rotate-45"
+                  >
+                    <BsArrowDownRight className="text-primary text-3xl" />
+                  </Link>
                 </div>
                 {/* title */}
-                <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500">{item.title}</h2>
+                <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500">
+                  {item.title}
+                </h2>
                 {/* description */}
                 <p className="text-white/60 ">{item.desctiption}</p>
                 {/* border */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 // import icon
@@ -23,39 +23,19 @@ const projects = [
     category: "frontend",
     title: "project 1",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint distinctio nostrum error temporibus praesentium odit, fuga animi earum est nemo!",
-    stack: [
-      {
-        name: "Html 5",
-      },
-      {
-        name: "Css 3",
-      },
-      {
-        name: "Javascript",
-      },
-    ],
+      "Responsive landing page with semantic HTML, modern CSS, and vanilla JS interactions—optimized for performance and accessibility.",
+    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
     image: "/assets/work/project111.png",
-    live: "", // add project link
-    github: "", // add project github repository
+    live: "",
+    github: "",
   },
   {
     num: "02",
     category: "frontend",
     title: "project 2",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint distinctio nostrum error temporibus praesentium odit, fuga animi earum est nemo!",
-    stack: [
-      {
-        name: "Html 5",
-      },
-      {
-        name: "Css 3",
-      },
-      {
-        name: "Javascript",
-      },
-    ],
+      "Interactive dashboard featuring reusable components, charts, and stateful UI—clean layout and mobile‑first design.",
+    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
     image: "/assets/work/project222.webp",
     live: "",
     github: "",
@@ -65,18 +45,8 @@ const projects = [
     category: "frontend",
     title: "project 3",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint distinctio nostrum error temporibus praesentium odit, fuga animi earum est nemo!",
-    stack: [
-      {
-        name: "Html 5",
-      },
-      {
-        name: "Css 3",
-      },
-      {
-        name: "Javascript",
-      },
-    ],
+      "E‑commerce front end with product listings, filters, and cart UI—fast UX, accessible forms, and clear micro‑interactions.",
+    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
     image: "/assets/work/project333.png",
     live: "",
     github: "",
@@ -86,18 +56,8 @@ const projects = [
     category: "frontend",
     title: "project 4",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint distinctio nostrum error temporibus praesentium odit, fuga animi earum est nemo!",
-    stack: [
-      {
-        name: "Html 5",
-      },
-      {
-        name: "Css 3",
-      },
-      {
-        name: "Javascript",
-      },
-    ],
+      "Portfolio SPA with smooth animations, route transitions, and component‑driven architecture—focused on readability and reuse.",
+    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
     image: "/assets/work/project444.jpg",
     live: "",
     github: "",
@@ -105,20 +65,10 @@ const projects = [
   {
     num: "05",
     category: "frontend",
-    title: "project 4",
+    title: "project 5",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint distinctio nostrum error temporibus praesentium odit, fuga animi earum est nemo!",
-    stack: [
-      {
-        name: "Html 5",
-      },
-      {
-        name: "Css 3",
-      },
-      {
-        name: "Javascript",
-      },
-    ],
+      "Blog/CMS UI with article cards, pagination, and search—clean typography, dark mode, and keyboard‑friendly navigation.",
+    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
     image: "/assets/work/project555.webp",
     live: "",
     github: "",
@@ -127,18 +77,32 @@ const projects = [
 
 const Work = () => {
   const [project, setProject] = useState(projects[0]);
+  const [isCarouselEnabled, setIsCarouselEnabled] = useState(true);
+  const swiperRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSlideChange = (swiper) => {
-    // get current slide index 
+    // get current slide index
     const currentIndex = swiper.activeIndex;
-    // update project state based in current slide index 
-    setProject(projects[currentIndex])
-  }
+    // update project state based in current slide index
+    setProject(projects[currentIndex]);
+    setActiveIndex(currentIndex);
+  };
+
+  const handleGoTo = (index) => {
+    if (!swiperRef.current) return;
+    swiperRef.current.slideTo(index);
+    setProject(projects[index]);
+    setActiveIndex(index);
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 ,transition:{delay:2.4,duration:0.4,ease:"easeIn",}}}
+      animate={{
+        opacity: 1,
+        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
+      }}
       className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0 "
     >
       <div className="container mx-auto">
@@ -169,6 +133,7 @@ const Work = () => {
               </ul>
               {/* border */}
               <div className=" border-white/20 border"> </div>
+
               <div className="flex items-center gap-4 ">
                 {/*live project buttons */}
                 <Link href={project.live}>
@@ -201,26 +166,80 @@ const Work = () => {
           </div>
 
           <div className="w-full xl:w-[50%] xl:h-[460px] ">
-            <Swiper 
-            spaceBetween={30} 
-            slidesPerView={1} 
-            className="xl:h-[520px] mb-12 "
-            onSlideChange={handleSlideChange}
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={1}
+              className="xl:h-[520px] mb-12 "
+              onSlideChange={handleSlideChange}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              allowTouchMove={isCarouselEnabled}
             >
-              {projects.map((item,index) => {
-                return <SwiperSlide key={index} className="w-full ">
-                  <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
-                    {/* overlay */}
-                    <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10  "></div>
-                    {/* image */}
-                    <div className="relative w-full h-full ">
-                      <Image src={project.image} fill className="object-cover" all=""/>
+              {projects.map((item, index) => {
+                return (
+                  <SwiperSlide key={index} className="w-full ">
+                    <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
+                      {/* overlay */}
+                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10  "></div>
+                      {/* image */}
+                      <div className="relative w-full h-full ">
+                        <Image
+                          src={project.image}
+                          fill
+                          className="object-cover"
+                          all=""
+                        />
+                      </div>
                     </div>
-                  </div>
-                </SwiperSlide>
+                  </SwiperSlide>
+                );
               })}
               {/* Slider Buttons */}
-              <WorksSliderBtns containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none" btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition rounded transition-all  "/> 
+              <div
+                className={`${
+                  !isCarouselEnabled ? "pointer-events-none opacity-50" : ""
+                }`}
+              >
+                {/* carousel controls */}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <button
+                    className={`px-3 py-2 rounded border text-sm transition ${
+                      isCarouselEnabled
+                        ? "bg-white/5 border-white/20 hover:bg-white/10"
+                        : "bg-accent text-primary border-accent hover:bg-accent/90"
+                    }`}
+                    onClick={() => setIsCarouselEnabled((v) => !v)}
+                  >
+                    {isCarouselEnabled ? "Lock carousel" : "Unlock carousel"}
+                  </button>
+                  <div className="flex items-center gap-2">
+                    {projects.map((p, idx) => (
+                      <button
+                        key={p.num}
+                        disabled={!isCarouselEnabled}
+                        onClick={() => handleGoTo(idx)}
+                        className={`w-8 h-8 rounded-full text-sm flex items-center justify-center border transition ${
+                          project.num === p.num
+                            ? "bg-accent text-primary border-accent"
+                            : "bg-white/5 text-white/80 border-white/20 hover:bg-white/10"
+                        } ${
+                          !isCarouselEnabled
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
+                        aria-label={`Go to slide ${p.num}`}
+                      >
+                        {p.num}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <WorksSliderBtns
+                  containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                  btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition rounded transition-all  "
+                  disablePrev={activeIndex === 0}
+                  disableNext={activeIndex === projects.length - 1}
+                />
+              </div>
             </Swiper>
           </div>
         </div>
