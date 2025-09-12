@@ -199,40 +199,6 @@ const Work = () => {
                   !isCarouselEnabled ? "pointer-events-none opacity-50" : ""
                 }`}
               >
-                {/* carousel controls */}
-                <div className="flex items-center gap-3 flex-wrap">
-                  {/* <button
-                    className={`px-3 py-2 rounded border text-sm transition ${
-                      isCarouselEnabled
-                        ? "bg-white/5 border-white/20 hover:bg-white/10"
-                        : "bg-accent text-primary border-accent hover:bg-accent/90"
-                    }`}
-                    onClick={() => setIsCarouselEnabled((v) => !v)}
-                  >
-                    {isCarouselEnabled ? "Lock carousel" : "Unlock carousel"}
-                  </button> */}
-                  <div className="flex items-center gap-2">
-                    {projects.map((p, idx) => (
-                      <button
-                        key={p.num}
-                        disabled={!isCarouselEnabled}
-                        onClick={() => handleGoTo(idx)}
-                        className={`w-8 h-8 rounded-full text-sm flex items-center justify-center border transition ${
-                          project.num === p.num
-                            ? "bg-accent text-primary border-accent"
-                            : "bg-white/5 text-white/80 border-white/20 hover:bg-white/10"
-                        } ${
-                          !isCarouselEnabled
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
-                        }`}
-                        aria-label={`Go to slide ${p.num}`}
-                      >
-                        {p.num}
-                      </button>
-                    ))}
-                  </div>
-                </div>
                 <WorksSliderBtns
                   containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
                   btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition rounded transition-all  "
