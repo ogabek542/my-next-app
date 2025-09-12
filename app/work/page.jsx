@@ -201,7 +201,7 @@ const Work = () => {
               >
                 {/* carousel controls */}
                 <div className="flex items-center gap-3 flex-wrap">
-                  <button
+                  {/* <button
                     className={`px-3 py-2 rounded border text-sm transition ${
                       isCarouselEnabled
                         ? "bg-white/5 border-white/20 hover:bg-white/10"
@@ -210,7 +210,7 @@ const Work = () => {
                     onClick={() => setIsCarouselEnabled((v) => !v)}
                   >
                     {isCarouselEnabled ? "Lock carousel" : "Unlock carousel"}
-                  </button>
+                  </button> */}
                   <div className="flex items-center gap-2">
                     {projects.map((p, idx) => (
                       <button
